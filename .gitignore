@@ -1,0 +1,45 @@
+# Secrets and credentials — never commit
+config/google_oauth_credentials.json
+config/google_token.json
+config/icloud_cookies/
+
+# Runtime state
+state/processed_ids.json
+state/face_encodings.pkl
+state/
+
+# Reference photos (biometric data — keep local only)
+references/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+*.egg
+pip-wheel-metadata/
+
+# Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Logs
+*.log

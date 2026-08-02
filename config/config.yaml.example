@@ -1,0 +1,63 @@
+# Google OAuth2 credentials — obtain from Google Cloud Console
+# https://console.cloud.google.com/apis/credentials
+# Enable "Photos Library API" and create an OAuth 2.0 Client ID (Desktop app)
+# Download the JSON and save it here as google_oauth_credentials.json
+#
+# NOTE: Never commit the actual credentials file to source control.
+
+google_photos:
+  enabled: true
+  # Path to the OAuth2 client secrets JSON downloaded from Google Cloud Console
+  credentials_file: "config/google_oauth_credentials.json"
+  # Token file where the OAuth2 access/refresh tokens will be cached
+  token_file: "config/google_token.json"
+  # Maximum number of media items to fetch per page (max 100)
+  page_size: 100
+
+icloud:
+  enabled: true
+  # Apple ID username (or set ICLOUD_USERNAME env var)
+  username: ""
+  # App-specific password from appleid.apple.com (or set ICLOUD_PASSWORD env var)
+  password: ""
+  # Directory to cache iCloud session cookies
+  cookie_dir: "config/icloud_cookies"
+
+# Path to the directory containing one sub-directory per person
+# e.g. references/mom/, references/dad/, references/partner/
+# Place 3–10 clear, front-facing photos in each sub-directory.
+references_dir: "references"
+
+detection:
+  # Face match tolerance: lower is stricter (0.4–0.6 recommended)
+  tolerance: 0.6
+  # Face detection model: "hog" (fast, CPU) or "cnn" (slower, more accurate)
+  model: "hog"
+  # Number of parallel worker processes (set to number of CPU cores, 16–32)
+  max_workers: 16
+  # Number of images per worker batch
+  batch_size: 8
+  # Path to cached face encodings for registered people (.pkl file)
+  encodings_cache: "state/face_encodings.pkl"
+
+nextcloud:
+  # Base URL of your Nextcloud instance (include trailing /nextcloud if applicable)
+  url: "https://nas.local/nextcloud"
+  # Nextcloud username (or set NEXTCLOUD_USERNAME env var)
+  username: ""
+  # Nextcloud password or app password (or set NEXTCLOUD_PASSWORD env var)
+  password: ""
+  # Remote base path for uploaded photos
+  remote_base_path: "/FamilyPhotos"
+  # Disable TLS certificate verification (only for self-signed certs on LAN)
+  verify_ssl: true
+
+pipeline:
+  # File tracking which media IDs have already been processed
+  checkpoint_file: "state/processed_ids.json"
+  # HTTP timeout in seconds for each image download
+  download_timeout: 30
+  # Perform detection but skip the upload step
+  dry_run: false
+  # Logging level: DEBUG, INFO, WARNING, ERROR
+  log_level: "INFO"
