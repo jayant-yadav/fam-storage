@@ -101,7 +101,7 @@ class ICloudConnector(BaseConnector):
             if not self._api.validate_verification_code(device, code):
                 raise RuntimeError("Invalid iCloud verification code.")
 
-        logger.info("iCloud authentication successful for %s.", username)
+        logger.info("iCloud authentication successful.")
 
     # ------------------------------------------------------------------
     # Media listing
