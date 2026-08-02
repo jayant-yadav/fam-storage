@@ -89,12 +89,7 @@ class ICloudConnector(BaseConnector):
             logger.info("iCloud two-step authentication required.")
             devices = self._api.trusted_devices
             for i, device in enumerate(devices):
-                # Display device name only; redact phone number for privacy
-                phone = device.get("phoneNumber", "")
-                redacted_phone = f"***{phone[-2:]}" if len(phone) >= 2 else "***"
-                print(
-                    f"  [{i}] {device.get('deviceName', 'Unknown')} ({redacted_phone})"
-                )
+                print(f"  [{i}] {device.get('deviceName', 'Unknown')}")
             device_index = int(input("Select trusted device: "))
             device = devices[device_index]
             if not self._api.send_verification_code(device):
